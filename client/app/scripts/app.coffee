@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('clientApp', ['ngRoute','decorators'])
+angular.module('clientApp', ['ngRoute','ngResource','decorators'])
   .config ($routeProvider) ->
     $routeProvider
       .when '/',
