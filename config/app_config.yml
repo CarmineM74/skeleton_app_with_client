@@ -1,0 +1,13 @@
+defaults: &defaults
+  client:
+    origin: http://localhost
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+    
