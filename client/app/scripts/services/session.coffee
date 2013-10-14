@@ -12,7 +12,7 @@ angular.module('clientApp')
       $http.defaults.headers.delete = { 'Authorization': 'Token ' + token }
 
     svc = {
-      currentUser: undefined
+      currentUser: ''
 
       login: (email,password) ->
         $log.log('Sending login credentials ...')
@@ -24,9 +24,10 @@ angular.module('clientApp')
             $rootScope.$broadcast('event:authenticated')
           ,(response) ->
             $log.log('Login failed!')
-            svc.currentUser = undefined
+            svc.currentUser = ''
             setTokenHeaders('')
-            $rootScope.$broadcast('event:unauthenticated')
+            if response.status == 404
+              alert(response.data.info)
         )
 
       logout: ->
@@ -37,9 +38,9 @@ angular.module('clientApp')
           ,(response) ->
             $log.log('Logout error: ' + response.info)
         )
-        svc.currentUser = undefined
+        svc.currentUser = ''
         setTokenHeaders('')
-        $rootScope.$broadcast('event:unauthenticated')
+        $rootScope.$broadcast('event:unauthorized')
 
     }
 

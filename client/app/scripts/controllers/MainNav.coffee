@@ -9,6 +9,7 @@ angular.module('clientApp')
     $scope.logged = false
 
     $scope.$on('event:authenticated', -> $scope.authenticated())
+    $scope.$on('event:unauthorized', -> alert('Unauthorized request!'))
 
     $scope.login = ->
       $log.log('Login with ' + JSON.stringify($scope.credentials))
