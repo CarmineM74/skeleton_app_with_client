@@ -25,6 +25,29 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+    <div class='navbar' ng-controller='MainNavCtrl'>
+      <div class='navbar-inner'>
+        <a class='brand' href='#'>Skeleton App</a>
+        <ul class='nav'>
+          <li class='active'><a href='#'>Home</a></li>
+        </ul>
+        <ul class='nav pull-right'>
+          <li class='divider-vertical'></li>
+          <li ng-show='logged'>
+            <button class='btn' type='button' ng-click='logout()'>Logout</button>
+          </li>
+          <li ng-hide='logged'>
+            <form class='navbar-form pull-right' name='loginForm'>
+              <input class='input-small' type='text' placeholder='EMail' ng-model='credentials.email' required>
+              <input class='input-small' type='password' placeholder='password' ng-model='credentials.password' required>
+              <button class='btn' type='button' ng-click='login()' ng-disabled='!loginForm.$valid'>Login</button>
+            </form>
+          </li>
+          <li class='divider-vertical' ng-hide='logged'></li>
+          <li ng-hide='logged'><a href='#'><i class='icon-user'></i>Signup</a></li>
+        </ul>
+      </div>
+    </div>
     <!-- Add your site or application content here -->
     <div class="container" ng-view=""></div>
 
@@ -69,6 +92,8 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/MainNav.js"></script>
+        <script src="scripts/decorators/logDecorator.js"></script>
         <!-- endbuild -->
 </body>
 </html>
