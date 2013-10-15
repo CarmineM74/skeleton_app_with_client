@@ -27,6 +27,7 @@ private
 
   def authenticate_user_from_token!
     Rails.logger.info("Authenticating user from token ...")
+    Rails.logger.info("Session: #{session.inspect}")
     authenticate_with_http_token do |token, options|
       Rails.logger.info("Token: #{token}\nOptions: #{options}")
       user = User.find_by_auth_token(token)
