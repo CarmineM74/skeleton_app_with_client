@@ -5,5 +5,7 @@ SkeletonWithClient::Application.routes.draw do
         sessions: 'users/sessions'
       },
       path_names: {sign_in: 'sessions', sign_out: 'sessions'}
+
+    resources :users, except: [:new,:edit]
   end
 end
