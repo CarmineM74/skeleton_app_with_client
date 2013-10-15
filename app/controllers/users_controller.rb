@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   respond_to :json
   
   def index
-    render status: 200, json: { success: true, info: 'NOT IMPLEMENTED', data: {}}
+    render status: 200, json: User.all() 
   end
 
   def show

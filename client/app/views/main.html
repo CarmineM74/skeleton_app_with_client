@@ -3,5 +3,28 @@
   <p>
     Please, login or signup to start using this great app!
   </p>
+
+  <button class='btn' type='button' ng-click='getUsers()'
+    ng-show='isLogged()'>
+      Fetch all users
+  </button>
+  <div ng-show='users'>
+    <h3>Users list</h3>
+    <table class='table table-striped'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat='u in users'>
+          <td>{{u.name}}</td>
+          <td>{{u.email}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
 </div>
 

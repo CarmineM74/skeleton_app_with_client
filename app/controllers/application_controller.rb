@@ -26,15 +26,15 @@ private
   end
 
   def authenticate_user_from_token!
+    Rails.logger.info("Authenticating user from token ...")
     authenticate_with_http_token do |token, options|
       Rails.logger.info("Token: #{token}\nOptions: #{options}")
       user = User.find_by_auth_token(token)
       if user && Devise.secure_compare(user.auth_token, token)
         sign_in user
-      else
-        return failure
       end
     end
+    return failure unless user_signed_in?
   end
 
 end

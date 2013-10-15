@@ -5,7 +5,7 @@ angular.module('clientApp')
     $log = $log.getInstance('MainNavCtrl')
     $log.log('Initializing ...')
 
-    $scope.credentials = {email: '', password: ''}
+    $scope.credentials = {email: 'test@me.com', password: 'memememe'}
     $scope.logged = false
 
     $scope.$on('event:authenticated', -> authenticated())
@@ -20,7 +20,11 @@ angular.module('clientApp')
       $log.log('Logging out ...')
       SessionSvc.logout()
       $scope.logged = false
-      $scope.credentials = {email: '', password: ''}
+      # The following line is commented in order to save
+      # the user from credentials input over and over.
+      # It MUST BE UNCOMMENTED BEFORE PRODUCTION
+      # $scope.credentials = {email: '', password: ''}
+      $window.location.href = '/'
 
     authenticated = ->
       $scope.logged = true
