@@ -29,8 +29,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'therubyracer', platforms: :ruby
 
-gem 'devise'
 gem 'uuidtools'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'thin'
 

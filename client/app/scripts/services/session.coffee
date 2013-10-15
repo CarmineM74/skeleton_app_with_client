@@ -5,7 +5,7 @@ angular.module('clientApp')
     $log = $log.getInstance('SessionSvc')
     $log.log('Initializing ...')
 
-    session = $resource('/api/users/sessions')
+    session = $resource('/api/session')
 
     setTokenHeaders = (token) ->
       $http.defaults.headers.common['Authorization'] = 'Token ' + token
