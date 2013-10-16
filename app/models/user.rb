@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   validates :email, presence: true, uniqueness: true
+  validates :name, presence: true
 
   def ensure_auth_token
     self.auth_token = generate_auth_token! #if self.auth_token.blank?
