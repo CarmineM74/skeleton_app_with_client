@@ -1,0 +1,21 @@
+<form name='newUserForm' class='form'>
+  <fieldset>
+    <legend>New user</legend>
+    <label>Name</label>
+    <input type='text' ng-model='user.name' placeholder="Enter your or your company's name" required>
+    <label>EMail</label>
+    <div class='input-prepend'>
+      <span class='add-on'>@</span>
+      <input type="text" ng-model='user.email' placeholder="EMail" required>
+    </div>
+    <label>Password</label>
+    <input type='password' ng-model='user.password' required min-length='4' >
+    <label>Password confirmation</label>
+    <input type='password' ng-model='user.password_confirmation' required min-length='4' pw-check other-pw='user.password'>
+    <div class='form-actions'>
+      <button class='btn btn-primary' ng-disabled='!newUserForm.$valid'>Create</button>
+      <button class='btn'>Cancel</button>
+    </div>
+  </fieldset>
+</form>
+

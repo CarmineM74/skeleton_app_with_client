@@ -8,5 +8,8 @@ angular.module('clientApp', ['ngRoute','ngResource','decorators'])
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
+      .when '/signup',
+        templateUrl: 'views/users/create.html'
+        controller: 'NewUserCtrl'
       .otherwise
         redirectTo: '/'
