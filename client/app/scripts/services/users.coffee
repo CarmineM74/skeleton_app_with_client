@@ -17,6 +17,21 @@ angular.module('clientApp')
             $log.log('Index failed: ' + JSON.stringify(response))
             $rootScope.$broadcast('event:users:index-failed')
         )
+      
+      save: (user) ->
+        if !user.id?
+          $log.log('Creating ...')
+          users.save({user: user},
+            (response) ->
+              $log.log('Success')
+              $rootScope.$broadcast('event:users:create-success')
+            ,(response) ->
+              $log.log('Failed: ' + JSON.stringify(response))
+              $rootScope.$broadcast('event:users:create-failed',response.data)
+          )
+        else
+          $log.log('Updating ...')
+
     }
 
     return svc

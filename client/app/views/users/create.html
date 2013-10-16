@@ -13,8 +13,9 @@
     <label>Password confirmation</label>
     <input type='password' ng-model='user.password_confirmation' required min-length='4' pw-check other-pw='user.password'>
     <div class='form-actions'>
-      <button class='btn btn-primary' ng-disabled='!newUserForm.$valid'>Create</button>
-      <button class='btn'>Cancel</button>
+      <button class='btn btn-primary' ng-disabled='!newUserForm.$valid'
+        ng-click='createUser()'>Create</button>
+      <a class='btn' href='#'>Cancel</a>
     </div>
   </fieldset>
 </form>

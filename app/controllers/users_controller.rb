@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   respond_to :json
+  skip_before_filter :authenticate_user_from_token!
+  skip_before_filter :verify_session_freshness!
   
   def index
     render status: 200, json: User.all() 
@@ -10,7 +12,23 @@ class UsersController < ApplicationController
   end
 
   def create
-    render status: 200, json: { success: true, info: 'NOT IMPLEMENTED', data: {}}
+    return failure('User already exists', :unprocessable_entity) if User.find_by_email(params[:user][:email])
+    user = User.new(create_params)
+    if user.save
+      render status: 201,
+        json: {
+          success: true,
+          info: 'user created',
+          data: user
+        }
+    else
+      render status: :unprocessable_entity,
+        json: {
+          success: false,
+          info: 'could not create user',
+          data: user.errors
+        }
+    end
   end
 
   def update
@@ -19,6 +37,12 @@ class UsersController < ApplicationController
 
   def destroy
     render status: 200, json: { success: true, info: 'NOT IMPLEMENTED', data: {}}
+  end
+
+private
+
+  def create_params
+    params.require(:user).permit!
   end
 
 end
