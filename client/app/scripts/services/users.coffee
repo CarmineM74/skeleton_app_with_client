@@ -32,6 +32,16 @@ angular.module('clientApp')
         else
           $log.log('Updating ...')
 
+      delete: (user) ->
+        $log.log('Deleting ...')
+        users.remove({id: user.id},
+          (response) ->
+            $log.log('Success')
+            $rootScope.$broadcast('event:users:delete-success')
+          ,(response) ->
+            $log.log('Failed: ' + JSON.stringify(response.data))
+            $rootScope.$broadcast('event:users:delete-failed')
+        )
     }
 
     return svc

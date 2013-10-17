@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   respond_to :json
-  skip_before_filter :authenticate_user_from_token!
-  skip_before_filter :verify_session_freshness!
+  skip_before_filter :authenticate_user_from_token!, only: [:create]
+  skip_before_filter :verify_session_freshness!, only: [:create]
+  before_filter :find_user, except: [:index,:create]
   
   def index
     render status: 200, json: User.all() 
@@ -36,13 +37,26 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    render status: 200, json: { success: true, info: 'NOT IMPLEMENTED', data: {}}
+    if @user.destroy
+      render status: :ok,
+        json: {
+          success: true,
+          info: "User deleted",
+          data: {}
+      }
+    else
+      return failure("Cannot delete user", :unprocessable_entity)
+    end
   end
 
 private
 
   def create_params
     params.require(:user).permit!
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 
 end

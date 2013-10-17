@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
+
 protected
 
   def current_user
@@ -37,6 +39,10 @@ private
         info: message,
         data: {}
       }
+  end
+
+  def resource_not_found
+    render status: 404, json: { success: false, info: "Resource not found!", data: {} }
   end
 
   def verify_session_freshness!

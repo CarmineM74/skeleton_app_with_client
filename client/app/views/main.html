@@ -15,12 +15,21 @@
         <tr>
           <th>Name</th>
           <th>Email</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat='u in users'>
           <td>{{u.name}}</td>
           <td>{{u.email}}</td>
+          <td>
+            <div class='btn-group'>
+              <button class='btn' ng-click='deleteUser(u)'
+                ng-disabled='isCurrentUser(u)'>
+                <i class='icon-minus-sign'></i>
+              </button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
